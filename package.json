@@ -1,0 +1,21 @@
+{
+  "name": "test-hub-mono",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": "true",
+  "workspaces": [
+    "autoPay-ui-tests",
+    "merchant-portal-ui-tests",
+    "mobile-app-tests",
+    "api-tests"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "test:all": "pnpm -r --parallel test"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,5 @@
+packages:
+  - "autoPay-ui-tests"
+  - "merchant-portal-ui-tests"
+  - "mobile-app-tests"
+  - "api-tests"
