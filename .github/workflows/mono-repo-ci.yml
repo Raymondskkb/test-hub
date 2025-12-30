@@ -2,14 +2,14 @@ name: Mono Repo CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ off ]
     paths:
       - 'api-tests/**'
       - 'autoPay-ui-tests/**'
       - 'merchant-portal-ui-tests/**'
       - 'mobile-app-tests/**'
   pull_request:
-    branches: [ main ]
+    branches: [ off ]
     paths:
       - 'api-tests/**'
       - 'autoPay-ui-tests/**'
