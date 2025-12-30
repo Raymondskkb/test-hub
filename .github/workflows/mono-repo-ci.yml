@@ -1,0 +1,58 @@
+name: Mono Repo CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'api-tests/**'
+      - 'autoPay-ui-tests/**'
+      - 'merchant-portal-ui-tests/**'
+      - 'mobile-app-tests/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'api-tests/**'
+      - 'autoPay-ui-tests/**'
+      - 'merchant-portal-ui-tests/**'
+      - 'mobile-app-tests/**'
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api-tests
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: npm test
+
+  autoPay-ui-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: autoPay-ui-tests
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: npm test
+
+  merchant-portal-ui-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: merchant-portal-ui-tests
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: npm test
+
+  mobile-app-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile-app-tests
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: npm test
