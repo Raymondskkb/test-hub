@@ -1,0 +1,22 @@
+name: API Tests CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'api-tests/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'api-tests/**'
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api-tests
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: npm test

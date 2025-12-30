@@ -1,0 +1,22 @@
+name: Mobile App Tests CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'mobile-app-tests/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'mobile-app-tests/**'
+
+jobs:
+  mobile-app-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile-app-tests
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: npm test
