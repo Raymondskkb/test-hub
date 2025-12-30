@@ -15,7 +15,8 @@
     "test:all": "pnpm -r --parallel test"
   },
   "devDependencies": {
-    "eslint": "^8.0.0",
-    "typescript": "^5.0.0"
+    "@eslint/js": "^9.39.1",
+    "eslint": "^8.57.1",
+    "typescript": "^5.9.3"
   }
 }
