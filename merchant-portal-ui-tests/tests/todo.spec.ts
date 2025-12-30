@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 
 test('should be able to add a new todo item', async ({ page }) => {
   // 1. Navigate to the application
-  await page.goto('demo.playwright.dev');
+  await page.goto('https://demo.playwright.dev/todomvc/#/');
 
   // 2. Locate the input field and fill it with text
   await page.locator('.new-todo').fill('Buy milk');
