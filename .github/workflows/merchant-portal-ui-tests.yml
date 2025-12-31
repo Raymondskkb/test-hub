@@ -9,6 +9,8 @@ on:
     branches: [ main ]
     paths:
       - 'merchant-portal-ui-tests/**'
+  repository_dispatch: 
+    types: [run-tests]
 
 jobs:
   merchant-portal-ui-tests:
