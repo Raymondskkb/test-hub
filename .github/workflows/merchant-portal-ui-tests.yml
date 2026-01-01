@@ -46,6 +46,6 @@ jobs:
           client-payload: |
             {
               "project": "merchant-portal-ui-tests",
-              "status": "${{ job.status }}",  # Capture test status (success or failure)
-              "run_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"  # URL to the run in test-hub
+              "status": "${{ job.status }}",
+              "run_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }
