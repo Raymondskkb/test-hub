@@ -10,21 +10,22 @@ on:
     paths:
       - 'merchant-portal-ui-tests/**'
   repository_dispatch: 
-    types: [run-tests]
+    types: [run-tests]  # This allows external triggering of this workflow
 
 jobs:
   merchant-portal-ui-tests:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: merchant-portal-ui-tests
+        working-directory: merchant-portal-ui-tests  # Ensure the tests run in the correct directory
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18   # or the version your project requires
+          node-version: 18  # Or the version your project requires
 
       - name: Install dependencies
         run: npm ci
@@ -36,7 +37,7 @@ jobs:
         run: npm test
 
       - name: Report status back to test-hub-anex
-        if: always()  # This ensures it runs even if the tests fail
+        if: ${{ github.event_name == 'repository_dispatch' && github.event.action == 'run-tests' }}  # Run this only when triggered externally
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.TH_TOKEN_PAT }}  # Personal access token to trigger test-hub-anex
@@ -45,6 +46,6 @@ jobs:
           client-payload: |
             {
               "project": "merchant-portal-ui-tests",
-              "status": "${{ job.status }}",
-              "run_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              "status": "${{ job.status }}",  # Capture test status (success or failure)
+              "run_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"  # URL to the run in test-hub
             }
