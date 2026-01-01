@@ -34,3 +34,17 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Report status back to test-hub-anex
+        if: always()  # This ensures it runs even if the tests fail
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.TH_TOKEN_PAT }}  # Personal access token to trigger test-hub-anex
+          repository: raymondskkb/test-hub-anex  # This is the source repo
+          event-type: test-results  # Event name that will be listened to in test-hub-anex
+          client-payload: |
+            {
+              "project": "merchant-portal-ui-tests",
+              "status": "${{ job.status }}",
+              "run_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            }
