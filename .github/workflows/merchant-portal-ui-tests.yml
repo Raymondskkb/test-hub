@@ -41,7 +41,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.TH_TOKEN }}  # Personal access token to trigger test-hub-anex
-          repository: raymondskkb/test-hub-anex  # This is the source repo
+          repository: Raymondskkb/test-hub-annex  # This is the source repo
           event-type: test-results  # Event name that will be listened to in test-hub-anex
           client-payload: |
             {
