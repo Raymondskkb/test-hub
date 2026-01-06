@@ -36,16 +36,17 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Report status back to test-hub-anex
-        if: ${{ github.event_name == 'repository_dispatch' && github.event.action == 'run-tests' }}  # Run this only when triggered externally
+      - name: Report status back to test-hub-annex
+        if: always() && github.event_name == 'repository_dispatch' && github.event.action == 'run-tests'
         uses: peter-evans/repository-dispatch@v3
         with:
-          token: ${{ secrets.TH_TOKEN }}  # Personal access token to trigger test-hub-anex
-          repository: Raymondskkb/test-hub-annex  # This is the source repo
-          event-type: test-results  # Event name that will be listened to in test-hub-anex
+          token: ${{ secrets.TH_TOKEN }}
+          repository: Raymondskkb/test-hub-annex
+          event-type: test-results
           client-payload: |
             {
               "project": "merchant-portal-ui-tests",
               "status": "${{ job.status }}",
               "run_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }
+      
