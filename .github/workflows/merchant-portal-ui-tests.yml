@@ -17,19 +17,30 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: merchant-portal-ui-tests  # Ensure the tests run in the correct directory
+        working-directory: merchant-portal-ui-tests
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
         with:
-          node-version: 18  # Or the version your project requires
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      
+      - name: Cache Playwright browsers
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-browsers-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-browsers-
 
       - name: Install dependencies
         run: npm ci
-
+      
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
@@ -54,7 +65,7 @@ jobs:
             {
               "project": "merchant-portal-ui-tests",
               "status": "${{ job.status }}",
-              "run_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              "run_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
               "artifact": "playwright-report"
 
             }
