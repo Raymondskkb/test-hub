@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
-          path: merchant-portal-ui-tests/playwright-report
+          path: merchant-portal-ui-tests/playwright-report/
       
       - name: Report status back to test-hub-annex
         if: always() && github.event_name == 'repository_dispatch' && github.event.action == 'run-tests'
@@ -55,5 +55,7 @@ jobs:
               "project": "merchant-portal-ui-tests",
               "status": "${{ job.status }}",
               "run_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              "artifact": "playwright-report"
+
             }
       
