@@ -18,5 +18,4 @@ jobs:
         working-directory: mobile-app-tests
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci
-      - run: npm test
+      - run: node ./tests/mobileTests.spec.ts

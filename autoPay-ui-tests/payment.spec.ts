@@ -34,6 +34,17 @@ test.describe.skip('add to cart scenarios', () => {
     await addAndViewCart(page);
     await expect(page.getByText(product)).toBeVisible();
   });
+  
+  test('Repeat - add to cart from search', async ({ page }) => {
+    const product = 'Xbox Wireless Controller Mineral Camo Special Edition'
+    const placeholder = page.getByPlaceholder('Search by product name or search by image')
+    await placeholder.click();
+    await placeholder.fill('xbox');
+    await placeholder.press('Enter');
+    await page.getByRole('img', { name: product }).click();
+    await addAndViewCart(page);
+    await expect(page.getByText(product)).toBeVisible();
+  });
 
   test('add to cart from all products page', async ({ page }) => {
     const product = 'Xbox Wireless Controller Lunar Shift Special Edition'

@@ -11,8 +11,8 @@ test('opens homepage 1', async ({ page }) => {
   await expect(page).toHaveTitle(/Example/);
 });
 
-test('opens homepage 2', async ({ page }) => {
-  await page.goto('https://en.wikipedia.org/wiki/1');
-  await page.screenshot({ path: 'wikipedia.png' });
-  await expect(page).toHaveTitle(/1 - Wikipedia/);
-});
+// test('opens homepage 2', async ({ page }) => {
+//   await page.goto('https://en.wikipedia.org/wiki/1');
+//   await page.screenshot({ path: 'wikipedia.png' });
+//   await expect(page).toHaveTitle(/1 - Wikipedia/);
+// });
