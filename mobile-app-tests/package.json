@@ -2,7 +2,7 @@
   "name": "mobile-app-tests",
   "version": "1.0.0",
   "scripts": {
-    "test": "jest",
+    "test": "node .\\tests\\mobileTests.spec.ts",
     "lint": "eslint ."
   },
   "devDependencies": {
